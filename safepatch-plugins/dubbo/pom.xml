@@ -3,23 +3,23 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.aland</groupId>
-        <artifactId>safepatch</artifactId>
+        <artifactId>safepatch-plugins</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>safepatch-plugins</artifactId>
+    <artifactId>dubbo</artifactId>
     <packaging>pom</packaging>
 
-    <name>safepatch-plugins</name>
+    <name>dubbo</name>
     <modules>
-        <module>dubbo</module>
+        <module>CVE-2023-23638-plugin</module>
     </modules>
-
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
+
     </dependencies>
 </project>

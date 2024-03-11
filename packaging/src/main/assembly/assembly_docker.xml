@@ -1,0 +1,50 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+    <id>bin</id>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <formats>
+        <format>zip</format>
+    </formats>
+
+    <files>
+
+        <file>
+            <source>../SafePatch/target/agent.jar</source>
+            <destName>agent.jar</destName>
+        </file>
+
+
+        <file>
+            <source>../packaging/src/main/conf/logback.xml</source>
+            <destName>conf/logback.xml</destName>
+        </file>
+
+        <file>
+            <source>../safepatch-plugins/dubbo/CVE-2023-23638-plugin/target/CVE-2023-23638-plugin.jar</source>
+            <destName>plugins/CVE-2023-23638-plugin/CVE-2023-23638-plugin.jar</destName>
+        </file>
+        <file>
+            <source>../agent-plugins/dubbo/CVE-2023-23638-plugin/src/main/resources/agent-plugin.properties</source>
+            <destName>plugins/CVE-2023-23638-plugin/conf/agent-plugin.properties</destName>
+        </file>
+
+
+    </files>
+
+
+    <dependencySets>
+
+        <dependencySet>
+            <includes>
+                <include>net.bytebuddy:byte-buddy</include>
+                <include>net.bytebuddy:byte-buddy-agent</include>
+            </includes>
+            <outputDirectory>boot/</outputDirectory>
+            <useProjectArtifact>true</useProjectArtifact>
+            <useTransitiveFiltering>true</useTransitiveFiltering>
+        </dependencySet>
+
+
+    </dependencySets>
+</assembly>

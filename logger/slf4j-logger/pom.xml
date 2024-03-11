@@ -3,14 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.aland</groupId>
-        <artifactId>safepatch</artifactId>
+        <artifactId>logger</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>safepatch-agent</artifactId>
+    <artifactId>slf4j-logger</artifactId>
     <packaging>jar</packaging>
 
-    <name>safepatch-agent</name>
+    <name>sl4f-logger</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -19,24 +19,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>net.bytebuddy</groupId>
-            <artifactId>byte-buddy</artifactId>
-            <version>1.12.10</version>
-        </dependency>
-        <dependency>
-            <groupId>net.bytebuddy</groupId>
-            <artifactId>byte-buddy-agent</artifactId>
-            <version>1.12.10</version>
-        </dependency>
-        <dependency>
             <groupId>com.aland</groupId>
             <artifactId>common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.aland</groupId>
-            <artifactId>plugin-container</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

@@ -1,0 +1,85 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.aland</groupId>
+        <artifactId>safepatch</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>packaging</artifactId>
+    <name>packaging</name>
+
+    <version>1.0.0</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>docker</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <skipAssemblyDocker>false</skipAssemblyDocker>
+                <skipAssemblyIdc>true</skipAssemblyIdc>
+            </properties>
+        </profile>
+        <profile>
+            <id>idc</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <skipAssemblyDocker>true</skipAssemblyDocker>
+                <skipAssemblyIdc>false</skipAssemblyIdc>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <finalName>sagent-${version}</finalName>
+        <plugins>
+            <!-- Assembly plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>assembly-idc</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <skipAssembly>${skipAssemblyIdc}</skipAssembly>
+                            <descriptors>
+                                <descriptor>src/main/assembly/assembly_idc.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+<!--                    <execution>-->
+<!--                        <id>assembly-docker</id>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>single</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <skipAssembly>${skipAssemblyDocker}</skipAssembly>-->
+<!--                            <descriptors>-->
+<!--                                <descriptor>src/main/assembly/assembly_docker.xml</descriptor>-->
+<!--                            </descriptors>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>

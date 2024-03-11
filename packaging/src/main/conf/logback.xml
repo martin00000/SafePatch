@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration>
+<configuration debug="false">
+
+    <contextName>safepatch</contextName>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%-5level [%contextName] [%d{yyyy-MM-dd HH:mm:ss.SSS}] [%logger] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="traceFileLogger" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--同时按照时间和size进行分段-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <if condition='!isDefined("CONFIG_ENV") || !isDefined("config_env")
+             ||  property("CONFIG_ENV").equals("local") ||  property("config_env").equals("local")'>
+                <then>
+                    <fileNamePattern>./safepatch/logs/dubbo-invoke.%d{yyyy-MM-dd}.%i.log.lz4</fileNamePattern>
+                </then>
+                <else>
+                    <if condition='isDefined("applicationName")'>
+                        <then>
+                            <fileNamePattern>
+                                /usr/local/aland/logs/safepatch/${applicationName}/dubbo-invoke.%d{yyyy-MM-dd}.%i.log.lz4
+                            </fileNamePattern>
+                        </then>
+                        <else>
+                            <fileNamePattern>
+                                /usr/local/aland/logs/safepatch/application/dubbo-invoke.%d{yyyy-MM-dd}.%i.log.lz4
+                            </fileNamePattern>
+                        </else>
+                    </if>
+                </else>
+            </if>
+            <maxFileSize>2GB</maxFileSize>
+            <maxHistory>1</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%p] [%t] [%c] - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="traceAsync" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="traceFileLogger"/>
+    </appender>
+
+    <logger name="dubbo.access.log" additivity="false" level="INFO">
+        <appender-ref ref="traceAsync"/>
+    </logger>
+
+
+
+    <logger name="com.aland.agent" additivity="true" level="INFO"/>
+    <root level="WARN">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>
