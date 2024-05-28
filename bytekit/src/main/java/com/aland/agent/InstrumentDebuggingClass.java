@@ -38,6 +38,8 @@ public enum InstrumentDebuggingClass {
             try {
                 if (debuggingClassesRootPath == null) {
                     try {
+
+
                         debuggingClassesRootPath = new File(AgentConfig.AGENT_HOME, "/debugging/" + AgentConfig.Agent.AGENT_APPLICATION_NAME );
                         if (!debuggingClassesRootPath.exists()) {
                             debuggingClassesRootPath.mkdir();
