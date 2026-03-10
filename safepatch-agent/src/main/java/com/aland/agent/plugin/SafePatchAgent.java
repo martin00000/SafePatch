@@ -70,6 +70,7 @@ public class SafePatchAgent {
             pluginManager.enablePlugins(Collections.emptyList());
             pluginManager.initPlugins();
             pluginManager.startPlugins();
+
         } catch (MalformedURLException | PluginException e) {
             System.out.println("init plugin manager error, error: " + e.getMessage());
         }
